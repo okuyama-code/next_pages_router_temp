@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@yamada-ui/lucide": "^1.1.1",
     "@yamada-ui/react": "^1.4.2",
     "axios": "^1.7.2",
     "jotai": "^2.8.3",
