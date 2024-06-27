@@ -1,11 +1,11 @@
-import { GetServerSidePropsContext } from "next"
+import { GetServerSidePropsContext } from 'next'
 
 export const getServerSideCommonProps = ({
   req,
 }: GetServerSidePropsContext) => {
   return {
     props: {
-      cookies: req.headers.cookie ?? "",
+      cookies: req.headers.cookie ?? '',
     },
   }
 }
