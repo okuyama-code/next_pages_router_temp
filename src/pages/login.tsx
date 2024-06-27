@@ -35,6 +35,7 @@ const Login = () => {
 
   const onSubmit = (data: FieldValues): void => {
     console.log(data)
+    console.log(process.env.NEXT_PUBLIC_API_BASE)
     successNotice({ description: 'ログインしました' })
   }
 
