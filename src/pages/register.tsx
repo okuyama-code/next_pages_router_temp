@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Control, Controller, FieldError, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -85,6 +86,15 @@ const Register = () => {
             Register
           </motion.button>
         </form>
+        <Link href="/" passHref>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="mt-6 text-center text-blue-600 hover:text-blue-800 transition-colors duration-300"
+          >
+            ホームへ戻る
+          </motion.div>
+        </Link>
       </motion.div>
     </div>
   );
