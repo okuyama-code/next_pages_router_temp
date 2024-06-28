@@ -3,8 +3,26 @@ import { Bird } from '@yamada-ui/lucide'
 
 import React from 'react'
 import { Controller, FieldValues, useForm } from 'react-hook-form'
+import { useSession, signIn, signOut } from "next-auth/react"
+
 
 const Login = () => {
+  const { data: session } = useSession()
+  if (session) {
+    return (
+      <>
+        Signed in as {session?.user?.email} <br />
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    )
+  }
+  return (
+    <>
+      Not signed in <br />
+      <button onClick={() => signIn()}>Sign in</button>
+    </>
+  )
+
   const {
     handleSubmit,
     control
