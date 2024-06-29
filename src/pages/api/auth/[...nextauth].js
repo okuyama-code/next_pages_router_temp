@@ -47,10 +47,10 @@ export default NextAuth({
       return token
     },
     async session({ session, token, user }) {
-      console.log("session関数!!")
-      console.log(session)
-      console.log(session.user.email)
+      console.log("token")
       console.log(token)
+      console.log('session');
+      console.log(session);
       // Send properties to the client, like an access_token from a provider.
       session.accessToken = token.accessToken
       return session
