@@ -9,7 +9,7 @@ touch .env.local
 .env.localに記述 (Github, Google認証のセットアップあり)
 ```
 # portは各自変える
-NEXT_PUBLIC_API_BASE="http://localhost:8080"
+NEXT_PUBLIC_API_BASE="http://localhost:8080/api/v1"
 
 # next-authのGithub認証
 # https://qiita.com/y_inoue15/items/d6942cd6e71ff3169822
