@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Flex, Button, Text, useColorMode, useColorModeValue, IconButton, Menu, MenuButton, MenuList, MenuItem } from '@yamada-ui/react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { Sun, Moon, Menu as MenuIcon, User } from 'lucide-react';
+import { Sun, Moon, Menu as MenuIcon } from 'lucide-react';
+import { getCurrentUser, getUsers } from './api/user';
+import { useAtom } from 'jotai';
+import { currentUserState, usersState } from '@/atoms/users-state';
 
 const Header = () => {
   const { data: session } = useSession();
@@ -10,8 +13,47 @@ const Header = () => {
   const bgColor = useColorModeValue("white", "gray.800");
   const textColor = useColorModeValue("gray.800", "white");
 
-  
+  const [fetchUsers, setFetchUsers] = useAtom(usersState)
+  const [fetchCurrentUser, setFetchCurrentUser] = useAtom(currentUserState)
 
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const res = await getUsers();
+        setFetchUsers(res.data.users);
+      } catch (e) {
+        console.error('Failed to fetch users:', e);
+        setError('Failed to fetch users');
+      }
+    }
+
+    async function fetchCurrentUser(email: string) {
+      try {
+        const params = { email };
+        const res = await getCurrentUser(params);
+        setFetchCurrentUser(res.data.user);
+      } catch (e) {
+        setError('Failed to fetch current user');
+      }
+    }
+
+    setLoading(true);
+    setError(null);
+
+    fetchUsers();
+
+    if (session?.user?.email) {
+      fetchCurrentUser(session.user.email);
+    }
+
+    setLoading(false);
+  }, [session]);
+
+  // console.log(fetchUsers)
+  console.log(fetchCurrentUser)
   return (
     <div>
       {/* header */}
@@ -34,7 +76,7 @@ const Header = () => {
 
             {session ? (
               <Menu>
-                <MenuButton as={Button} rightIcon={<User />}>
+                <MenuButton as={Button}>
                   {session.user?.name || session.user?.email}
                 </MenuButton>
                 <MenuList>
