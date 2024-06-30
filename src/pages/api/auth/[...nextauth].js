@@ -2,7 +2,7 @@ import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { register } from './auth';
+import { register } from '../auth';
 
 export default NextAuth({
   providers: [
@@ -21,13 +21,6 @@ export default NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        console.log("credentials")
-        console.log(credentials)
-        // Here you should check the credentials against your database
-        // This is just a placeholder
-        const user = { id: 1, name: "奥山", email: credentials.email }
-        console.log(credentials.password)
-        console.log(user)
         if (user) {
           return user
 
@@ -39,7 +32,6 @@ export default NextAuth({
   ],
   callbacks: {
     async signIn({ user, account }) {
-
 			try {
         const params = {
           provider: account?.provider,
@@ -48,6 +40,7 @@ export default NextAuth({
           email: user?.email
         }
         const res = await register(params)
+        console.log(res)
 				if (res.status === 200) {
 					return true;
 				} else {

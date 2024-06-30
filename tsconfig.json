@@ -17,6 +17,6 @@
     },
     "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/api/auth/[...nextauth].js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/api/auth/[...nextauth].js", "src/pages/api/api-client.ts"],
   "exclude": ["node_modules"]
 }

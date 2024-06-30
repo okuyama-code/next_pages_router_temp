@@ -10,6 +10,8 @@ const Header = () => {
   const bgColor = useColorModeValue("white", "gray.800");
   const textColor = useColorModeValue("gray.800", "white");
 
+  
+
   return (
     <div>
       {/* header */}
@@ -63,10 +65,8 @@ const Header = () => {
 
       {session && (
         <>
-          id:{session?.user?.id} <br />
           name:{session?.user?.name} <br />
           email: {session?.user?.email} <br />
-          authProvider: {session?.user?.authProvider} <br />
           image:
           {session?.user?.image && (
             <img
